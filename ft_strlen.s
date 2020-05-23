@@ -10,9 +10,8 @@ section	.text
 			global	ft_strlen
 
 ft_strlen:
-			xor, rax, rax
+			xor rax, rax
 			jmp	zerocomp
-
 up:
 			inc	rax
 zerocomp:

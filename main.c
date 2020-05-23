@@ -11,7 +11,7 @@ int	test_strlen(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-/*int	test_strcpy(int argc, char *argv[])
+int	test_strcpy(int argc, char *argv[])
 {
 	char	*str1 = strdup(argv[2]);
 	char	*str2 = strdup(argv[2]);
@@ -24,11 +24,12 @@ int	test_strlen(int argc, char *argv[])
 	printf("strcpy\t\t|%s|\nft_strcpy\t|%s|\n", strcpy(str1, argv[3]), ft_strcpy(str2,argv[3]));
 	if (strlen(argv[3]) != 0)
 		argv[3][0] = '_';
-	printf("src : %s\n", str2);
+	printf("str1 : %s\n", str1);
+	printf("str2 : %s\n", str2);
 	free(str1);
 	free(str2);
 	return (EXIT_SUCCESS);
-}*/
+}
 
 int	test_strcmp(int argc, char *argv[])
 {
@@ -125,8 +126,8 @@ int main(int argc, char *argv[])
 	}
 	if (strcmp(argv[1], "strlen") == 0)
 		test_strlen(argc, argv);
-	/*else if (strcmp(argv[1], "strcpy") == 0)
-		test_strcpy(argc, argv);*/
+	else if (strcmp(argv[1], "strcpy") == 0)
+		test_strcpy(argc, argv);
 	else if (strcmp(argv[1], "strcmp") == 0)
 		test_strcmp(argc, argv);
 	else if (strcmp(argv[1], "write") == 0)
