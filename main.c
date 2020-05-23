@@ -28,7 +28,7 @@ int	test_strlen(int argc, char *argv[])
 	free(str1);
 	free(str2);
 	return (EXIT_SUCCESS);
-}
+}*/
 
 int	test_strcmp(int argc, char *argv[])
 {
@@ -39,7 +39,7 @@ int	test_strcmp(int argc, char *argv[])
 	}
 	printf("ft_strcmp\t|%d|\nstrcmp\t\t|%d|\n", ft_strcmp(argv[2], argv[3]), strcmp(argv[2],argv[3]));
 	return (EXIT_SUCCESS);
-}*/
+}
 
 int test_write(int argc, char *argv[])
 {
@@ -126,9 +126,9 @@ int main(int argc, char *argv[])
 	if (strcmp(argv[1], "strlen") == 0)
 		test_strlen(argc, argv);
 	/*else if (strcmp(argv[1], "strcpy") == 0)
-		test_strcpy(argc, argv);
+		test_strcpy(argc, argv);*/
 	else if (strcmp(argv[1], "strcmp") == 0)
-		test_strcmp(argc, argv);*/
+		test_strcmp(argc, argv);
 	else if (strcmp(argv[1], "write") == 0)
 		test_write(argc, argv);
 	else if (strcmp(argv[1], "read") == 0)
