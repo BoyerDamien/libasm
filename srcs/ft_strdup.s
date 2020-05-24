@@ -8,25 +8,25 @@ section	.text
 ft_strdup:
 
 _get_len:
-    call    ft_strlen
-    inc     rax
-    push    rdi
-    mov     rdi, rax
+        call    ft_strlen
+        inc     rax
+        push    rdi
+        mov     rdi, rax
 
 _do_malloc:
-    call    malloc
-    cmp     rax, 0
-    jz      _malloc_error
+        call    malloc
+        cmp     rax, 0
+        jz      _malloc_error
 
 _copy:
-    pop     rdi
-	mov		rsi, rdi
-	mov		rdi, rax
-	call	ft_strcpy
+        pop     rdi
+        mov		rsi, rdi
+        mov		rdi, rax
+        call	ft_strcpy
 
 finish:
-	ret
+	    ret
 
 _malloc_error:
-    mov rax, 0
-    ret
+        mov rax, 0
+        ret
