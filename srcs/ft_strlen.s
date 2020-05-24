@@ -3,11 +3,12 @@ section	.text
 
 ft_strlen:
 			xor rax, rax
-			jmp	zerocomp
-up:
-			inc	rax
-zerocomp:
-			cmp	BYTE [rdi + rax], 0
-			jnz	up
-finish:
-			ret							
+
+_loop:
+			cmp	byte [rdi + rax], 0
+			jz _end
+			inc rax
+			jmp _loop
+
+_end:
+	ret						
