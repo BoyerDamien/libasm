@@ -1,4 +1,4 @@
-#include "lib.h"
+#include "libasm.h"
 
 int	test_strlen(int argc, char *argv[])
 {
@@ -97,8 +97,7 @@ int test_read(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-
-/*int	test_strdup(int argc, char *argv[])
+int	test_strdup(int argc, char *argv[])
 {
 	char *ret1;
 	char *ret2;
@@ -115,7 +114,7 @@ int test_read(int argc, char *argv[])
 	free(ret1);
 	free(ret2);
 	return (EXIT_SUCCESS);
-}*/
+}
 
 int main(int argc, char *argv[])
 {
@@ -134,8 +133,8 @@ int main(int argc, char *argv[])
 		test_write(argc, argv);
 	else if (strcmp(argv[1], "read") == 0)
 		test_read(argc, argv);
-	/*else if (strcmp(argv[1], "strdup") == 0)
-		test_strdup(argc, argv);*/
+	else if (strcmp(argv[1], "strdup") == 0)
+		test_strdup(argc, argv);
 	else
 		printf(ERROR_FUNC_UNKNOW);
 	return(EXIT_SUCCESS);
