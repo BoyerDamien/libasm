@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/20 09:03:17 by dboyer            #+#    #+#              #
-#    Updated: 2020/05/24 11:36:35 by dboyer           ###   ########.fr        #
+#    Updated: 2020/05/24 11:37:45 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,4 +70,4 @@ re      : fclean all
 norm: fclean
 	~/.norminette/norminette.rb
 
-.PHONY  :	all clean fclean re bonus%
+.PHONY  :	all clean fclean re%
