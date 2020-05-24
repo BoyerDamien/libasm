@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/20 09:03:17 by dboyer            #+#    #+#              #
-#    Updated: 2020/05/24 11:35:27 by dboyer           ###   ########.fr        #
+#    Updated: 2020/05/24 11:36:35 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,11 +52,11 @@ $(NAME) :	$(OBJS)
 
 clean   :
 	$(RM) $(OBJS)
-	$(RM) ${OBJS_MAIN}
+	$(RM) ${MAIN_OBJS}
+	$(RM) a.out
 
 fclean  : clean
 	$(RM) $(NAME)
-	$(RM) a.out
 
 test    : $(NAME) $(MAIN_OBJS)
 	$(CC) $(CFLAGS) $(NAME) $(OBJS) $(MAIN_OBJS)
