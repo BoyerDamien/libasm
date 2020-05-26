@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/26 12:12:56 by dboyer            #+#    #+#             */
+/*   Updated: 2020/05/26 12:12:57 by dboyer           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 int	test_strlen(int argc, char *argv[])
@@ -76,24 +88,19 @@ int test_read(int argc, char *argv[])
 		printf(ERROR_NEED_ARG);
 		return (EXIT_SUCCESS);
 	}
-	if ((fd1 = atoi(argv[2])) == 3 || (fd2 = atoi(argv[2])) == 3)
+	if ((fd1 = atoi(argv[2])) >= 3 || (fd2 = atoi(argv[2])) >= 3)
 	{
-		fd1 = open("test_read.txt", O_RDONLY);
-		fd2 = open("test_read.txt", O_RDONLY);
+		fd1 = open("./test_read.txt", O_RDONLY);
+		fd2 = open("./test_read.txt", O_RDONLY);
 	}
-	else if (atoi(argv[2]) == 4)
-	{
-		fd1 = open("test_read.txt", O_WRONLY);
-		fd2 = open("test_read.txt", O_WRONLY);
-	}
-	str1 = strdup(argv[3]);
-	str2 = strdup(argv[3]);
+	str1 = (char *)malloc((strlen(argv[2]) + 1) * sizeof(char));
+	str2 = (char *)malloc((strlen(argv[2]) + 1) * sizeof(char));
 	printf("read\t : %s\t| ret = %zd\n", str1, read(fd1, str1, atoi(argv[4])));
 	printf("ft_read\t : %s\t| ret = %zd\n", str2, ft_read(fd2, str2, atoi(argv[4])));
-	free(str1);
-	free(str2);
 	close(fd1);
 	close(fd2);
+	free(str1);
+	free(str2);
 	return (EXIT_SUCCESS);
 }
 
@@ -110,7 +117,7 @@ int	test_strdup(int argc, char *argv[])
 	printf("strdup\t\t: %s\n", ret1 = strdup(argv[2]));
 	printf("ft_strdup\t: %s\n", ret2 = ft_strdup(argv[2]));
 	argv[2][0] = '8';
-	printf("Modified arg\t: %s\n", ret2);
+	printf("Modified arg\t: %s\n", argv[2]);
 	free(ret1);
 	free(ret2);
 	return (EXIT_SUCCESS);

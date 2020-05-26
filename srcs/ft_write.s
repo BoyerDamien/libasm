@@ -14,7 +14,6 @@ _write:
         syscall
         cmp     rax, 0
         jl      _error
-        mov     rax, rdx
         ret
 
 _error:
