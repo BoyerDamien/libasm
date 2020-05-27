@@ -6,7 +6,7 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:12:56 by dboyer            #+#    #+#             */
-/*   Updated: 2020/05/26 12:12:57 by dboyer           ###   ########.fr       */
+/*   Updated: 2020/05/27 14:28:01 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	test_strcpy(int argc, char *argv[])
 	printf("strcpy\t\t|%s|\nft_strcpy\t|%s|\n", strcpy(str1, argv[3]), ft_strcpy(str2,argv[3]));
 	if (strlen(argv[3]) != 0)
 		argv[3][0] = '_';
-	printf("str1 : %s\n", str1);
-	printf("str2 : %s\n", str2);
+	printf("str1 | %s\n", str1);
+	printf("str2 | %s\n", str2);
 	free(str1);
 	free(str2);
 	return (EXIT_SUCCESS);
@@ -50,7 +50,7 @@ int	test_strcmp(int argc, char *argv[])
 		printf(ERROR_NEED_ARG);
 		return (EXIT_SUCCESS);
 	}
-	printf("ft_strcmp\t|%d|\nstrcmp\t\t|%d|\n", ft_strcmp(argv[2], argv[3]), strcmp(argv[2],argv[3]));
+	printf("ft_strcmp\t:|%d|\nstrcmp\t\t:|%d|\n", ft_strcmp(argv[2], argv[3]), strcmp(argv[2],argv[3]));
 	return (EXIT_SUCCESS);
 }
 
@@ -72,6 +72,7 @@ int test_write(int argc, char *argv[])
 	fflush(stdout);
 	int ret_m = ft_write(fd, argv[3], atoi(argv[4]));
 	printf("\t| ret = %d\n", ret_m);
+	fflush(stdout);
 	close(fd);
 	return (EXIT_SUCCESS);
 }
