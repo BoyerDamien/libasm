@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/27 14:33:34 by dboyer            #+#    #+#              #
-#    Updated: 2020/05/27 14:39:59 by dboyer           ###   ########.fr        #
+#    Updated: 2020/05/28 14:38:06 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,14 @@ class ft_strlen(unittest.TestCase):
             with self.subTest(i = i):
                 string = random_string(10)
                 with os.popen(f"./a.out strlen {string}") as result:
-                    self.check(result)
+                    self.check(result, [string])
     
     def test_empty_string(self):
         with os.popen(f'./a.out strlen \"\"') as result:
-            self.check(result)
+            self.check(result, [""])
     
-    def check(self, result):
+    def check(self, result, _input):
         result = result.readlines()
-        self.assertEqual(len(result), 2, "Wrong output format")
+        self.assertEqual(len(result), 2, f"Wrong output format for: {_input}")
         result = [x.split("\t")[-1] for x in result]
-        self.assertEqual(result[0], result[1], "Wrong return")
+        self.assertEqual(result[0], result[1], f"Wrong return for: {_input}")

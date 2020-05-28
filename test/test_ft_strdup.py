@@ -13,15 +13,15 @@ class ft_strdup(unittest.TestCase):
             with self.subTest(i = i):
                 string = random_string(10)
                 with os.popen(f"./a.out strdup {string}") as result:
-                    self.check(result)
+                    self.check(result, [string])
     
     def test_empty_string(self):
         with os.popen(f'./a.out strdup \"\"') as result:
-            self.check(result)
+            self.check(result, [""])
     
-    def check(self, result):
+    def check(self, result, _input):
         result = result.readlines()
         result = [x.split(":")[-1] for x in result]
         self.assertEqual(len(result), 3, "Incorrect output format")
-        self.assertEqual(result[0], result[1], "Wrong output on stdout")
+        self.assertEqual(result[0], result[1], f"Wrong output on stdout for: {_input}")
         self.assertNotEqual(result[1], result[2], "The string was not duplicated")

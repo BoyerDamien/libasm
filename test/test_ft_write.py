@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/26 16:29:45 by dboyer            #+#    #+#              #
-#    Updated: 2020/05/26 16:39:47 by dboyer           ###   ########.fr        #
+#    Updated: 2020/05/28 14:30:00 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ class ft_write(unittest.TestCase):
             with self.subTest(i = i):
                 string_params = random_string(10)
                 with os.popen(f"./a.out write 1 {string_params} {len(string_params)}") as result:
-                    self.check(result)
+                    self.check(result, [1, string_params, len(string_params)])
     
     def test_random_size(self):
         for i in range(N_TESTS):
@@ -33,7 +33,7 @@ class ft_write(unittest.TestCase):
                 string_params = random_string(10)
                 size = random.randint(-20, 20)
                 with os.popen(f"./a.out write 1 {string_params} {size}") as result:
-                    self.check(result)
+                    self.check(result, [1, string_params, size])
     
     def test_fd(self):
         for i in range(5):
@@ -41,7 +41,7 @@ class ft_write(unittest.TestCase):
                 string_params = random_string(10)
                 fd = -1 + i
                 with os.popen(f"./a.out write {fd} {string_params} {len(string_params)}") as result:
-                    self.check(result)
+                    self.check(result, [fd, string_params, len(string_params)])
                 if fd == 3:
                     with open("./test_write.txt", "+r") as f:
                         content = f.read()
@@ -55,12 +55,13 @@ class ft_write(unittest.TestCase):
             with self.subTest(i = i):
                 size = random.randint(-10, 10)
                 with os.popen(f"./a.out write 1 \'\' {size}") as result:
-                    self.check(result)
+                    self.check(result, [1, "", size])
 
-    def check(self, result):
+    def check(self, result, _input):
         result = result.readlines()
-        result = [x.split(":")[1] for x in result]
-        result = [x.split("|") for x in result]
-        self.assertEqual(len(result), 2, "Incorrect output format")
-        self.assertEqual(result[0][0], result[1][0], "Wrong output on stdout")
-        self.assertEqual(result[0][1], result[1][1], "Wrong return")
+        result = [x.split(":")[1] if ":" in x else x.split("=")[1] for x in result ]
+        result = [x.split("|") if "|" in x else x for x in result]
+        self.assertEqual(len(result), 4, "Incorrect output format")
+        self.assertEqual(result[1], result[3])
+        self.assertEqual(result[0][0], result[2][0], f"Wrong output on stdout for : {_input}")
+        self.assertEqual(result[0][1], result[2][1], f"Wrong return for: {_input}")

@@ -6,7 +6,7 @@
 #    By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/26 16:48:07 by dboyer            #+#    #+#              #
-#    Updated: 2020/05/27 13:51:01 by dboyer           ###   ########.fr        #
+#    Updated: 2020/05/28 14:33:14 by dboyer           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,15 +27,15 @@ class ft_read(unittest.TestCase):
                     f.write(f"{string_params}")
                     f.write(f"{string_params}")
                 with os.popen(f"cat test_read.txt |./a.out read 0 {string_params} {len(string_params)}") as result:
-                    self.check(result)
+                    self.check(result, [0, string_params, len(string_params)])
     
     def test_neg_input(self):
         with self.subTest(i = 0):
             string_params = random_string(10)
             with os.popen(f"cat test_read.txt | ./a.out read 0 {string_params} -1") as result:
-                self.check(result)
+                self.check(result, [0, string_params, -1])
             with os.popen(f"cat test_read.txt | ./a.out read -1 {string_params} {len(string_params)}") as result:
-                self.check(result)
+                self.check(result, [-1, string_params, len(string_params)])
     
     def test_empty_string(self):
         string_params = random_string(10)
@@ -43,12 +43,13 @@ class ft_read(unittest.TestCase):
             f.write("")
             f.write("")
         with os.popen(f"cat test_read.txt | ./a.out read 0 {string_params} {len(string_params)}") as result:
-            self.check(result)
+            self.check(result, [0, string_params, len(string_params)])
 
-    def check(self, result):
+    def check(self, result, _input):
         result = result.readlines()
-        result = [x.split(":")[1] for x in result]
-        result = [x.split("|") for x in result]
-        self.assertEqual(len(result), 2, "Incorrect output format")
-        self.assertEqual(result[0][0], result[1][0], "Wrong output on stdout")
-        self.assertEqual(result[0][1], result[1][1], "Wrong return")
+        result = [x.split(":")[1] if ":" in x else x.split("=")[1] for x in result ]
+        result = [x.split("|") if "|" in x else x for x in result]
+        self.assertEqual(len(result), 4, "Incorrect output format")
+        self.assertEqual(result[1], result[3])
+        self.assertEqual(result[0][0], result[2][0], f"Wrong output on stdout for : {_input}")
+        self.assertEqual(result[0][1], result[2][1], f"Wrong return for: {_input}")

@@ -6,11 +6,12 @@
 /*   By: dboyer <dboyer@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/26 12:12:56 by dboyer            #+#    #+#             */
-/*   Updated: 2020/05/27 14:28:01 by dboyer           ###   ########.fr       */
+/*   Updated: 2020/05/28 14:32:44 by dboyer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
+#include <errno.h>
 
 int	test_strlen(int argc, char *argv[])
 {
@@ -65,13 +66,19 @@ int test_write(int argc, char *argv[])
 	}
 	if ((fd = atoi(argv[2])) == 3)
 		fd = open("test_write.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
-	printf("write\t : ");
+	printf("write\t : ");	
 	fflush(stdout);
 	int ret_o = write(fd, argv[3], atoi(argv[4]));
-	printf("\t| ret = %d\nft_write : ", ret_o);
+	printf("\t| ret = %d\n", ret_o);
+	printf("errno = %d\n", errno);
+	fflush(stdout);
+	errno = 0;
+	printf("ft_write : ");
 	fflush(stdout);
 	int ret_m = ft_write(fd, argv[3], atoi(argv[4]));
 	printf("\t| ret = %d\n", ret_m);
+	fflush(stdout);
+	printf("errno = %d\n", errno);
 	fflush(stdout);
 	close(fd);
 	return (EXIT_SUCCESS);
@@ -97,7 +104,10 @@ int test_read(int argc, char *argv[])
 	str1 = (char *)malloc((strlen(argv[2]) + 1) * sizeof(char));
 	str2 = (char *)malloc((strlen(argv[2]) + 1) * sizeof(char));
 	printf("read\t : %s\t| ret = %zd\n", str1, read(fd1, str1, atoi(argv[4])));
+	printf("errno = %d\n", errno);
+	errno = 0;
 	printf("ft_read\t : %s\t| ret = %zd\n", str2, ft_read(fd2, str2, atoi(argv[4])));
+	printf("errno = %d\n", errno);
 	close(fd1);
 	close(fd2);
 	free(str1);
