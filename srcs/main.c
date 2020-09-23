@@ -101,8 +101,8 @@ int test_read(int argc, char *argv[])
 		fd1 = open("./test_read.txt", O_RDONLY);
 		fd2 = open("./test_read.txt", O_RDONLY);
 	}
-	str1 = (char *)malloc((strlen(argv[2]) + 1) * sizeof(char));
-	str2 = (char *)malloc((strlen(argv[2]) + 1) * sizeof(char));
+	str1 = (char *)malloc((atoi(argv[4]) + 1) * sizeof(char));
+	str2 = (char *)malloc((atoi(argv[4]) + 1) * sizeof(char));
 	printf("read\t : %s\t| ret = %zd\n", str1, read(fd1, str1, atoi(argv[4])));
 	printf("errno = %d\n", errno);
 	errno = 0;
